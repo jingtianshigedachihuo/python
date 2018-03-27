@@ -25,3 +25,5 @@ directory 目录
 default 违约 
 pattern  模式
 exists  存在
+modify 修改
+column 列
