@@ -1,4 +1,4 @@
-from flask import Flask 
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 app = Flask(__name__)
@@ -24,10 +24,10 @@ class Category(db.Model):
     __tablename__ = 'categorys'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    file = db.relationship('files')
+    file = db.relationship('File')
     def __init__(self, name):
         self.name = name
-def insert_data():
+'''def insert_data():
     db.create_all()
     java = Category('Java')
     python = Category('Python')
@@ -38,5 +38,16 @@ def insert_data():
     db.session.add(file1)
     db.session.add(file2)
     db.session.commit()
+'''
+@app.route('/')
+def index():
+    return render_template('index.html',files=File.query.all())
+@app.route('/files/<file_id>')
+def file(file_id):
+    file_items = File.query.get_or_404(file_id)
+    return render_template('file.html',fi=file_items)
+@app.errorhandler(404)
+def Found_get(e):
+    return render_template('404.html'),404
 if __name__ == '__main__':
     app.run()
