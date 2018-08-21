@@ -1,2 +1,20 @@
-<a href="http://127.0.0.1:3000/files/1">{{files[0].title}}</a>
-<a href="http://127.0.0.1:3000/files/2">{{files[1].title}}</a>
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+  </head>
+  <body>
+    <ul>
+     {% for file in files %}
+     <li>
+       <a href="{{ url_for('file', file_id=file.id) }}" target="_blank">{{ file.title }}
+       </a>
+       {% for tag in file.tags %}
+         <span>{{ tag }}</span>
+       {% endfor %}
+     </li>
+     {% endfor %}
+    </ul>
+  </body>
+</html>

@@ -1,2 +1,10 @@
-{ extends "base.html" %}
-
+{% extends "base.html" %}
+<head>
+{%block title %}404{% endblock %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='404.css')}}">
+{% endblock %}
+</head>
+<body>
+{% block haha %}<p class="fout" >shiyanlou 404 </p>{% endblock %}
+</body>
